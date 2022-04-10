@@ -11,4 +11,11 @@ public class AppContext {
         return g;
     }
 
+    @Bean
+    public Greeter greeter1(){
+        Greeter g = new Greeter();
+        g.setFormat("%s, 안녕하세요! greeter1");
+        return g;
+    }
+
 }

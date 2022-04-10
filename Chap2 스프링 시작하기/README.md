@@ -9,4 +9,21 @@
   - AnnotationConfigApplicationContext, GenericXmlApplicationContext, GenericGroovyApplicationContext
   - 3개의 클래스는 각각 Java코드, XML, 그루비를 통해 정보를 읽어 객체 생성과 초기화를 수행한다.
   - 즉, ApplicationContext의 구현체이다.
-  - 각 클래스는 설정 정보로부터 Bean을 생성/초기화/의존 주입을 하고 내부에 보관한다.
+  - 각 클래스는 설정 정보로부터 Bean을 생성/초기화/의존 주입을 하고 내부에 보관한다.  
+  
+
+- 싱글톤 객체
+  - ```java 
+      public class Main {
+        public static void main(String[] args) {
+          AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppContext.class);
+          
+          Greeter g1 = ctx.getBean("greeter", Greeter.class);
+          Greeter g2 = ctx.getBean("greeter", Greeter.class)
+          System.out.println(g1 == g2); // true
+          ctx.close();
+        }
+      }
+      ```
+  - 위 코드를 시행하면 true가 출력된다. 즉, 스프링 컨테이너는 기본적으로 Bean에 대해 하나의 객체만 생성한다.
+  - 
