@@ -26,4 +26,24 @@
       }
       ```
   - 위 코드를 시행하면 true가 출력된다. 즉, 스프링 컨테이너는 기본적으로 Bean에 대해 하나의 객체만 생성한다.
-  - 
+  - ```java 
+      @Configuration
+      public class AppContext {
+
+        @Bean
+        public Greeter greeter(){
+          Greeter g = new Greeter();
+          g.setFormat("%s, 안녕하세요!");
+          return g;
+        }
+
+        @Bean
+        public Greeter greeter1(){
+          Greeter g = new Greeter();
+          g.setFormat("%s, 안녕하세요! greeter1");
+          return g;
+        }
+
+      }
+      ```
+  - @Bean에 대해 하나의 객체를 생성하기에 위와 같이 작성할 경우 2개의 객체가 생성된다.
