@@ -1,6 +1,8 @@
-import lombok.AllArgsConstructor;
+package spring;
+
 import lombok.Getter;
 import lombok.Setter;
+import spring.WrongIdPasswordException;
 
 import java.time.LocalDateTime;
 

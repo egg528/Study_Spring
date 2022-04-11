@@ -1,3 +1,5 @@
+package spring;
+
 public class ChangePasswordService {
 
     private MemberDao memberDao;

@@ -1,3 +1,5 @@
+package spring;
+
 import lombok.Getter;
 import lombok.Setter;
 

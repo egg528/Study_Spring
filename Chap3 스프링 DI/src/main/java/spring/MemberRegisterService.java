@@ -1,3 +1,5 @@
+package spring;
+
 import java.time.LocalDateTime;
 
 public class MemberRegisterService {
