@@ -1,4 +1,4 @@
-package aspect;
+package aspect2;
 
 import java.util.Arrays;
 
@@ -6,17 +6,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.core.annotation.Order;
 
 @Aspect
-public class ExeTimeAspect {
+public class ExeTimeAspect2 {
 
-	@Pointcut("execution(public * chap07..*(..))")
-	private void publicTarget() {
-	}
-
-	@Around("publicTarget()")
+	@Around("aspect2.CommonPointcut.commonTarget()")
 	public Object measure(ProceedingJoinPoint joinPoint) throws Throwable {
 		long start = System.nanoTime();
 		try {
@@ -31,4 +25,5 @@ public class ExeTimeAspect {
 					(finish - start));
 		}
 	}
+
 }

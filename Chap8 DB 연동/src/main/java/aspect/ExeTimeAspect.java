@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.core.annotation.Order;
 
 @Aspect
+// @Order(1)
 public class ExeTimeAspect {
 
 	@Pointcut("execution(public * chap07..*(..))")
@@ -31,4 +32,5 @@ public class ExeTimeAspect {
 					(finish - start));
 		}
 	}
+
 }
