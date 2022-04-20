@@ -73,8 +73,39 @@ public class ExeTimeAspect {
 - 위 코드를 요약하자면 chap07 패키지 하위 빈의 public 메서드가 실행되면 mesure 메서드로 대체되어 기존 메서드 로직 전, 후, 예외 발생 시점 등에 공통 기능이 추가된다.
 
 ### `ProceedingJoinPoint`
+- 위 예시 코드를 보면 mesure 메서드에 매개변수로 ProceedingJoinPoint를 받는다.
+- Around Advice의 경우 공통 로직이 핵심 로직 전, 후, 예외 상황 모두에 들어가야 한다.
+- 때문에 핵심 로직을 수행할 수 있는 ProceedingJoinPoint를 매개변수로 받아 핵심 로직을 수행할 때 proceed() 메서드를 통해 수행한다.
+- Before Advice의 경우 핵심 로직 이전에 공통 로직이 수행되기 때문에 따로 ProceedingJoinPoint를 매개변수로 받을 필요가 없다.
 
 ### `프록시 생성 방식, 인터페이스 상속 VS 클래스 상속`
+``` java
+@Configuration
+@EnableAspectJAutoProxy
+public class AppCtx {
+	@Bean
+	public ExeTimeAspect exeTimeAspect() {
+		return new ExeTimeAspect();
+	}
+
+	@Bean
+	public Calculator calculator() {
+		return new RecCalculator();
+	}
+}
+```
+- 위의 calculator Bean은 RecCalculator 클래스를 반환한다.
+  - 하지만 RecCalculator는 AOP가 적용되어 있다.
+  - 때문에 getBean 메서드로 calculator Bean을 꺼내어 확인해보면 $Proxy 클래스인 것을 확인할 수 있다.
+- 이때 Proxy 클래스가 생성되는 과정에 주목해봐야 한다.
+  - RecCalculator 클래스는 Calculator 인터페이스를 상속받아 구현됐다.
+  - 때문에 Proxy 또한 Calculator 인터페이스를 상속받아 구현된다.
+  - 확인을 위해 Calculator cal = ctx.getBean("calculator", RecCalculator.class)를 수행해보면 예외가 발생한다.
+    - 이유는 calculator Bean은 Proxy 객체이고, Proxy 객체는 Calculator 인터페이스를 상속하여 Calculator 타입으로는 가져올 수 있지만
+    - Calculator의 구현체인 RecCalculator 타입으로는 가져올 수 없기 떄문이다.
+- `이와 같이 인터페이스를 상속 받아 구현된 클래스에 AOP를 적용할 때, Proxy가 인터페이스를 상속받는 것이 아닌 해당 클래스를 상속받아 구현하고 싶다면 @EnableAspectJAutoProxy(proxyTargetClass = true)를 사용하면 된다.`
+
+
 
 ### `excution 명시자`
 
