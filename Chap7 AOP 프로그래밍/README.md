@@ -106,9 +106,76 @@ public class AppCtx {
 - `이와 같이 인터페이스를 상속 받아 구현된 클래스에 AOP를 적용할 때, Proxy가 인터페이스를 상속받는 것이 아닌 해당 클래스를 상속받아 구현하고 싶다면 @EnableAspectJAutoProxy(proxyTargetClass = true)를 사용하면 된다.`
 
 
-
-### `excution 명시자`
-
 ### `한 Pointcut에 여러 Advice 적용시 순서의 중요성`
+``` java
+public class RecCalculator implements Calculator {
 
+	@Override
+	public long factorial(long num) {
+        if (num == 0)
+            return 1;
+        else
+            return num * factorial(num - 1);
+	}
+}
+```
+``` java
+@Aspect
+@Order(1)
+public class ExeTimeAspect {
+
+	@Pointcut("execution(public * chap07..*(..))")
+	private void publicTarget() {
+	}
+
+	@Around("publicTarget()")
+	public Object measure(ProceedingJoinPoint joinPoint) throws Throwable {
+		long start = System.nanoTime();
+		try {
+			Object result = joinPoint.proceed();
+			return result;
+		} finally {
+			long finish = System.nanoTime();
+			Signature sig = joinPoint.getSignature();
+			System.out.printf("%s.%s(%s) 실행 시간 : %d ns\n",
+					joinPoint.getTarget().getClass().getSimpleName(),
+					sig.getName(), Arrays.toString(joinPoint.getArgs()),
+					(finish - start));
+		}
+	}
+}
+```
+``` java
+@Aspect
+// @Order(2)
+public class CacheAspect {
+
+	private Map<Long, Object> cache = new HashMap<>();
+
+	@Pointcut("execution(public * chap07..*(long))")
+	public void cacheTarget() {
+	}
+	
+	@Around("cacheTarget()")
+	public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
+		Long num = (Long) joinPoint.getArgs()[0];
+		if (cache.containsKey(num)) {
+			System.out.printf("CacheAspect: Cache에서 구함[%d]\n", num);
+			return cache.get(num);
+		}
+
+		Object result = joinPoint.proceed();
+		cache.put(num, result);
+		System.out.printf("CacheAspect: Cache에 추가[%d]\n", num);
+		return result;
+	}
+
+}
+```
+- 위 코드를 보면 factorial 메서드에 mesure와 excute 로직이 모두 Around Advice 시점으로 적용되는 것을 확인할 수 있다.
+- 이 경우에 Calculator 객체를 받아와 factorial을 실행하면 어떤 방식으로 동작하게 될까.
+  - 기본적으로 정확환 순서가 없다. Spring Framework나 Java 버전에 따라 순서는 변한다.
+- 때문에 동작 순서가 중요할 경우 @Order('순번')을 통해 실행 순서를 명시해주어야 한다.  
+
+  
 ### `@Pointcut과 @Around의 분리를 통한 @Pointcut 재사용`
