@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Chap8 DB 연동" />
         <module name="Chap5 컴포넌트 스캔" />
         <module name="Chap7 AOP 프로그래밍" />
         <module name="Chap6 빈 라이프사이클과 범위" />
