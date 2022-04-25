@@ -24,7 +24,6 @@ public class MainForMemberDao {
 		selectAll();
 		updateMember();
 
-
 		ctx.close();
 	}
 
