@@ -175,7 +175,4 @@ public class CacheAspect {
 - 위 코드를 보면 factorial 메서드에 mesure와 excute 로직이 모두 Around Advice 시점으로 적용되는 것을 확인할 수 있다.
 - 이 경우에 Calculator 객체를 받아와 factorial을 실행하면 어떤 방식으로 동작하게 될까.
   - 기본적으로 정확환 순서가 없다. Spring Framework나 Java 버전에 따라 순서는 변한다.
-- 때문에 동작 순서가 중요할 경우 @Order('순번')을 통해 실행 순서를 명시해주어야 한다.  
-
-  
-### `@Pointcut과 @Around의 분리를 통한 @Pointcut 재사용`
+- 때문에 동작 순서가 중요할 경우 @Order('순번')을 통해 실행 순서를 명시해주어야 한다.

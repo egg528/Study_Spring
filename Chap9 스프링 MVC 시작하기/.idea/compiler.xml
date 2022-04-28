@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Chap8 DB 연동" />
+        <module name="Chap5 컴포넌트 스캔" />
+        <module name="Chap7 AOP 프로그래밍" />
+        <module name="Chap6 빈 라이프사이클과 범위" />
+        <module name="Chap4 의존 자동 주입" />
+        <module name="Chap9 스프링 MVC 시작하기" />
+        <module name="Chap3 스프링 DI" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Chap4 의존 자동 주입" options="--add-modules java.base" />
+    </option>
+  </component>
+</project>
