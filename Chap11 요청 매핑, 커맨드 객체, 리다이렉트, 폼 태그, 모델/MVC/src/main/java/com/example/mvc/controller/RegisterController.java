@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class RegisterController {
 
-    private MemberRegisterService memberRegisterService;
+    private final MemberRegisterService memberRegisterService;
 
     @RequestMapping("/step1")
     public String handleStep1(){
@@ -31,7 +31,7 @@ public class RegisterController {
 
     @GetMapping("/step2")
     public String handleStep2Get(){
-        return "redirect:register/step1";
+        return "redirect:/register/step1";
     }
 
     @PostMapping("/step3")
@@ -41,6 +41,6 @@ public class RegisterController {
             return "register/step3";
         } catch (DuplicateMemberException ex){
             return "register/step2";
-        } 
+        }
     }
 }
