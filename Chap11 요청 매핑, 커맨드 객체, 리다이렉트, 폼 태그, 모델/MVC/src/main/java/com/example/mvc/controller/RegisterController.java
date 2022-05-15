@@ -37,9 +37,11 @@ public class RegisterController {
     @PostMapping("/step3")
     public String handleStep3(RegisterRequest regReq){
         try{
+            System.out.println(regReq.getEmail());
             memberRegisterService.regist(regReq);
             return "register/step3";
         } catch (DuplicateMemberException ex){
+            System.out.println("Error");
             return "register/step2";
         }
     }

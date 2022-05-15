@@ -1,6 +1,5 @@
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <title>회원가입</title>
 </head>
@@ -9,12 +8,12 @@
     <form action="step3" method = post>
         <p>
             <label>이메일: <br>
-            <input type = "text" name="email" id="email">
+            <input type = "text" name="email" id="email" th:value="${registerRequest.email}">
             </label>
         </p>
         <p>
             <label>이름: <br>
-                <input type = "text" name="name" id="name">
+                <input type = "text" name="name" id="name"  th:value="${registerRequest.name}">
             </label>
         </p>
         <p>
