@@ -1,29 +1,28 @@
-
 <!DOCTYPE html>
     <meta charset="UTF-8">
     <title>회원가입</title>
 </head>
 <body>
     <h2>회원 정보 입력</h2>
-    <form action="step3" method = post>
+    <form action="step3" method="post" th:object="${registerRequest}">
         <p>
             <label>이메일: <br>
-            <input type = "text" name="email" id="email" th:value="${registerRequest.email}">
+            <input type="text"  th:field="*{email}" />
             </label>
         </p>
         <p>
             <label>이름: <br>
-                <input type = "text" name="name" id="name"  th:value="${registerRequest.name}">
+            <input th:field="*{name}" />
             </label>
         </p>
         <p>
             <label>비밀번호: <br>
-                <input type = "password" name="password" id="password">
+            <input th:field="*{password}" />
             </label>
         </p>
         <p>
             <label>비밀번호 확인: <br>
-                <input type = "password" name="confirmpassword" id="confirmpassword">
+            <input th:field="*{confirmPassword}"/>
             </label>
         </p>
         <input type="submit" value="가입 완료">
