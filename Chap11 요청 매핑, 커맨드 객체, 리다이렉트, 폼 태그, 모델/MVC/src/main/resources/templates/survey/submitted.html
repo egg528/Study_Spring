@@ -6,11 +6,17 @@
 </head>
 <body>
 <p>응답 내용:</p>
-<ul>
-  <tr></tr>
+<ul>,
+    <tr th:each = "ansData: ${ansData}">
+      <tr th:each="response: ${ansData.responses}">
+        <li th:text="|${responseStat.index+1}: ${response}|"></li>
+      </tr>
+    </tr>
 
+  <td>
 </ul>
-<p>응답자 위치: ${ansData.res.location}</p>
-<p>응답자 나이: ${ansData.res.age}</p>
+
+<p>응답자 지역:<p th:text="${ansData.res.location}"/></p>
+<p>응답자 나이:<p th:text="${ansData.res.age}"/></p>
 </body>
 </html>

@@ -19,6 +19,9 @@ public class SurveyController {
 
     @PostMapping
     public String submit(@ModelAttribute("ansData")AnsweredData data){
+
+        for(String str : data.getResponses()) System.out.println(str);
+
         return "survey/submitted";
     }
 }

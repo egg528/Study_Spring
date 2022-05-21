@@ -9,6 +9,6 @@ import java.util.List;
 @Getter @Setter
 public class AnsweredData {
 
-    private List<String> reponses;
+    private List<String> responses;
     private Respondent res;
 }
